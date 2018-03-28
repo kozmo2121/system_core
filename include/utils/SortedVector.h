@@ -31,6 +31,8 @@
 
 namespace android {
 
+// DO NOT USE: please use std::set
+
 template <class TYPE>
 class SortedVector : private SortedVectorImpl
 {

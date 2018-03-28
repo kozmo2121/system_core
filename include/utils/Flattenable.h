@@ -30,13 +30,13 @@ class FlattenableUtils {
 public:
     template<int N>
     static size_t align(size_t size) {
-        COMPILE_TIME_ASSERT_FUNCTION_SCOPE( !(N & (N-1)) );
+        static_assert(!(N & (N - 1)), "Can only align to a power of 2.");
         return (size + (N-1)) & ~(N-1);
     }
 
     template<int N>
     static size_t align(void const*& buffer) {
-        COMPILE_TIME_ASSERT_FUNCTION_SCOPE( !(N & (N-1)) );
+        static_assert(!(N & (N - 1)), "Can only align to a power of 2.");
         intptr_t b = intptr_t(buffer);
         buffer = (void*)((intptr_t(buffer) + (N-1)) & ~(N-1));
         return size_t(intptr_t(buffer) - b);
